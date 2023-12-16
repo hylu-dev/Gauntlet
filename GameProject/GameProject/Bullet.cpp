@@ -42,5 +42,5 @@ void Bullet::Load(json::JSON& node)
 }
 
 void Bullet::SetTarget(Vec2 dir) {
-    direction = dir - start_pos;
+    direction = dir - ownerEntity->GetTransform().position;
 }

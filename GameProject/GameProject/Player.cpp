@@ -51,6 +51,7 @@ void Player::HandleFire() {
     if (input.isMouseButtonPressed(SDL_BUTTON_LEFT)) {
         int mouseX, mouseY;
         const Uint32 mouseState = SDL_GetMouseState(&mouseX, &mouseY);
+        Vec2 mousePos = { (float)mouseX, (float)mouseY };
 
         std::vector<std::string> components = {
             "BoxCollider",
@@ -65,7 +66,10 @@ void Player::HandleFire() {
             (TextureAsset*)AssetManager::Get().GetAsset("bullet")
         );
         newBullet->GetTransform().position = ownerEntity->GetTransform().position;
-        bullet->SetTarget(ownerEntity->GetTransform().position);
+
+        bullet->SetTarget(mousePos);
+
+        LOG("" << mousePos.x << ":" << mousePos.y);
     }
 }
 
