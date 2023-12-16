@@ -82,6 +82,8 @@ public:
      */
     std::string& GetName() { return name; }
 
+    void SetName(std::string _name) { name = _name; }
+
     /**
      * @brief Gets the GUID of the object.
      *

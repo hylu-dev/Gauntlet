@@ -17,7 +17,7 @@ public:
     void SetTarget(Vec2 dir);
 
 private:
-    float speed = 5.0f;
+    float speed = 500.0f;
     Vec2 start_pos;
     BoxCollider* collider = nullptr;
     STRCODE game_over_scene = -1;

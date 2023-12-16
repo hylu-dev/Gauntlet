@@ -75,7 +75,7 @@
             }
           },
           {
-            "ClassName": "CircleCollider",
+            "ClassName": "BoxCollider",
             "ClassData": {}
           },
           {

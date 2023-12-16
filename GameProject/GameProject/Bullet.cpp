@@ -11,8 +11,8 @@ void Bullet::Initialize()
 {
     Component::Initialize();
     start_pos = ownerEntity->GetTransform().position;
-    collider = (BoxCollider*)ownerEntity->GetComponent("BoxCollider");
-    
+    collider = (BoxCollider*)ownerEntity->CreateComponent("BoxCollider");
+    ownerEntity->SetName("Bullet");
 }
 void Bullet::Update() {
     // Move the player
@@ -28,8 +28,7 @@ void Bullet::Update() {
         {
             continue;
         }
-
-        ownerEntity->GetTransform().position = start_pos;
+        ownerEntity->GetParentScene()->RemoveEntity(uid);
     }
 }
 void Bullet::Load(json::JSON& node)
@@ -43,4 +42,7 @@ void Bullet::Load(json::JSON& node)
 
 void Bullet::SetTarget(Vec2 dir) {
     direction = dir - ownerEntity->GetTransform().position;
+    if (direction != Vec2::Zero) {
+        direction.Normalize();
+    }
 }

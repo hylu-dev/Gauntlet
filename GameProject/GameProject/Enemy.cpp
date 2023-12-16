@@ -35,8 +35,8 @@ void Enemy::Update() {
         {
             continue;
         }
-
-        ownerEntity->GetTransform().position = start_pos;
+        speed = 0.0f;
+        ownerEntity->GetTransform().position = { -100, -100 };
     }
 }
 void Enemy::Load(json::JSON& node)

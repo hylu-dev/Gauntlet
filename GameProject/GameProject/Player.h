@@ -23,6 +23,9 @@ private:
     Vec2 start_pos;
     BoxCollider* collider = nullptr;
     STRCODE game_over_scene = -1;
+    float fireCooldown = 0.5;
+    float fireCounter = 0;
+    bool fired = false;
 
     TextureAsset* up = nullptr;
     TextureAsset* left = nullptr;

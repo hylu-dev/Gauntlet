@@ -24,6 +24,8 @@ void Player::Update() {
     this->HandleMovement();
     this->HandleFire();
 
+
+
     if (collider == nullptr)
     {
         return;
@@ -46,18 +48,23 @@ void Player::Update() {
 }
 
 void Player::HandleFire() {
-    const InputSystem& input = InputSystem::Instance();
+    if (fired) {
+        fireCounter += Time::Instance().DeltaTime();
+    }
 
-    if (input.isMouseButtonPressed(SDL_BUTTON_LEFT)) {
+    if (fireCounter > fireCooldown) {
+        fired = false;
+        fireCounter = 0;
+    }
+
+    const InputSystem& input = InputSystem::Instance();
+    if (input.isMouseButtonPressed(SDL_BUTTON_LEFT) && !fired) {
+        fired = true;
+        fireCounter = 0;
+
         int mouseX, mouseY;
         const Uint32 mouseState = SDL_GetMouseState(&mouseX, &mouseY);
         Vec2 mousePos = { (float)mouseX, (float)mouseY };
-
-        std::vector<std::string> components = {
-            "BoxCollider",
-            "Bullet",
-            "Sprite"
-        };
 
         Entity* newBullet = ownerEntity->GetParentScene()->CreateEntity();
         Bullet* bullet = (Bullet*)newBullet->CreateComponent("Bullet");
@@ -68,8 +75,6 @@ void Player::HandleFire() {
         newBullet->GetTransform().position = ownerEntity->GetTransform().position;
 
         bullet->SetTarget(mousePos);
-
-        LOG("" << mousePos.x << ":" << mousePos.y);
     }
 }
 
