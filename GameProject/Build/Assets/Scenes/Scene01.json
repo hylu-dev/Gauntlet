@@ -15,6 +15,9 @@
       },
       {
         "GUID": "bat"
+      },
+      {
+        "GUID": "bullet"
       }
     ]
   },

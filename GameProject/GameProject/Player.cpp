@@ -1,5 +1,6 @@
 #include "GameCore.h"
 #include "Player.h"
+#include "Bullet.h"
 
 #define NDEBUG_PLAYER
 
@@ -20,6 +21,55 @@ void Player::Initialize()
 
 }
 void Player::Update() {
+    this->HandleMovement();
+    this->HandleFire();
+
+    if (collider == nullptr)
+    {
+        return;
+    }
+    for (const auto& other: collider->OnCollisionEnter())
+    {
+	    if (other->GetOwner()->GetName() != "Enemy")
+	    {
+            continue;
+        }
+
+    	Scene* current_scene = SceneManager::Get().GetActiveScene();
+    	if (SceneManager::Get().SetActiveScene(game_over_scene))
+    	{
+    		current_scene->isEnabled = false;
+    	}
+
+        ownerEntity->GetTransform().position = start_pos;
+    }
+}
+
+void Player::HandleFire() {
+    const InputSystem& input = InputSystem::Instance();
+
+    if (input.isMouseButtonPressed(SDL_BUTTON_LEFT)) {
+        int mouseX, mouseY;
+        const Uint32 mouseState = SDL_GetMouseState(&mouseX, &mouseY);
+
+        std::vector<std::string> components = {
+            "BoxCollider",
+            "Bullet",
+            "Sprite"
+        };
+
+        Entity* newBullet = ownerEntity->GetParentScene()->CreateEntity();
+        Bullet* bullet = (Bullet*)newBullet->CreateComponent("Bullet");
+        Sprite* sprite = (Sprite*)newBullet->CreateComponent("Sprite");
+        sprite->SetTextureAsset(
+            (TextureAsset*)AssetManager::Get().GetAsset("bullet")
+        );
+        newBullet->GetTransform().position = ownerEntity->GetTransform().position;
+        bullet->SetTarget(ownerEntity->GetTransform().position);
+    }
+}
+
+void Player::HandleMovement() {
     Vec2 dir = Vec2::Zero;
     const InputSystem& input = InputSystem::Instance();
 
@@ -31,7 +81,7 @@ void Player::Update() {
             sprite->SetTextureAsset(left);
             sprite->SetSpriteSheet(1, 12, 12);
         }
-        
+
     }
     if (input.isKeyPressed(SDLK_RIGHT) || input.isKeyPressed(SDLK_d) || input.isGamepadButtonPressed(0, SDL_CONTROLLER_BUTTON_DPAD_RIGHT)) {
         dir.x += 1;
@@ -73,27 +123,9 @@ void Player::Update() {
 
     // Move the player
     ownerEntity->GetTransform().position += dir * (speed * Time::Instance().DeltaTime());
-
-    if (collider == nullptr)
-    {
-        return;
-    }
-    for (const auto& other: collider->OnCollisionEnter())
-    {
-	    if (other->GetOwner()->GetName() != "Enemy")
-	    {
-            continue;
-        }
-
-    	Scene* current_scene = SceneManager::Get().GetActiveScene();
-    	if (SceneManager::Get().SetActiveScene(game_over_scene))
-    	{
-    		current_scene->isEnabled = false;
-    	}
-
-        ownerEntity->GetTransform().position = start_pos;
-    }
 }
+
+
 void Player::Load(json::JSON& node)
 {
     Component::Load(node);

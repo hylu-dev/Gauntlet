@@ -14,6 +14,11 @@ public:
     void Update() override;
     void Load(json::JSON&) override;
 private:
+
+    void HandleMovement();
+
+    void HandleFire();
+
     float speed = 5.0f;
     Vec2 start_pos;
     BoxCollider* collider = nullptr;

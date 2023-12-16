@@ -1,29 +1,22 @@
 #include "GameCore.h"
-#include "Enemy.h"
+#include "Bullet.h"
 
-#define NDEBUG_ENEMY
+#define NDEBUG_BULLET
 
-IMPLEMENT_DYNAMIC_CLASS(Enemy)
+IMPLEMENT_DYNAMIC_CLASS(Bullet)
 
 #include "AnimatedSprite.h"
 
-void Enemy::Initialize()
+void Bullet::Initialize()
 {
     Component::Initialize();
     start_pos = ownerEntity->GetTransform().position;
     collider = (BoxCollider*)ownerEntity->GetComponent("BoxCollider");
+    
 }
-void Enemy::Update() {
-    target = SceneManager::Get().FindEntityByName("Player").front()->GetTransform();
-    Vec2 dir = target.position - ownerEntity->GetTransform().position;
-
-    // Normalize the direction vector if it's not zero
-    if (dir != Vec2::Zero) {
-        dir.Normalize();
-    }
-
+void Bullet::Update() {
     // Move the player
-    ownerEntity->GetTransform().position += dir * (speed * Time::Instance().DeltaTime());
+    ownerEntity->GetTransform().position += direction * (speed * Time::Instance().DeltaTime());
 
     if (collider == nullptr)
     {
@@ -31,7 +24,7 @@ void Enemy::Update() {
     }
     for (const auto& other : collider->OnCollisionEnter())
     {
-        if (other->GetOwner()->GetName() != "Bullet")
+        if (other->GetOwner()->GetName() != "Enemy")
         {
             continue;
         }
@@ -39,11 +32,15 @@ void Enemy::Update() {
         ownerEntity->GetTransform().position = start_pos;
     }
 }
-void Enemy::Load(json::JSON& node)
+void Bullet::Load(json::JSON& node)
 {
     Component::Load(node);
     if (node.hasKey("Speed"))
     {
         speed = static_cast<float>(node.at("Speed").ToFloat());
     }
+}
+
+void Bullet::SetTarget(Vec2 dir) {
+    direction = dir - start_pos;
 }
