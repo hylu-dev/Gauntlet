@@ -61,7 +61,7 @@ void Sprite::Render()
 {
     if (texture == nullptr)
     {
-        LOG("No pretty picture :(");
+        LOG("Texture not found");
         return;
     }
     const auto texture = this->texture->GetTexture();

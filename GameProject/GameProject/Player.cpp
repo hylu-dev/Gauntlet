@@ -69,9 +69,6 @@ void Player::Update() {
     // Normalize the direction vector if it's not zero
     if (dir != Vec2::Zero) {
         dir.Normalize();
-#ifdef DEBUG_PLAYER
-        LOG("Input: " << dir.x << ", " << dir.y);
-#endif
     }
 
     // Move the player

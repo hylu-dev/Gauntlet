@@ -12,6 +12,9 @@
       },
       {
         "GUID": "link_down"
+      },
+      {
+        "GUID": "bat"
       }
     ]
   },
@@ -26,7 +29,7 @@
         "Transform": {
           "Position": [100.0, 200.0],
           "Rotation": 0.0,
-          "Scale": [5.0, 5.0]
+          "Scale": [4.0, 4.0]
         },
         "Components": [
           {
@@ -59,13 +62,13 @@
         "Transform": {
           "Position": [1000.0, 250.0],
           "Rotation": 0.0,
-          "Scale": [0.4, 0.4]
+          "Scale": [1.0, 1.0]
         },
         "Components": [
           {
             "ClassName": "Sprite",
             "ClassData": {
-              "Texture": "awooga"
+              "Texture": "bat"
             }
           },
           {
