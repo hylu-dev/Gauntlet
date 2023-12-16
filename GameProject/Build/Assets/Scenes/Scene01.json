@@ -1,0 +1,79 @@
+{
+  "AssetManager": {
+    "Assets": [
+      {
+        "GUID": "link_up"
+      },
+      {
+        "GUID": "link_left"
+      },
+      {
+        "GUID": "link_right"
+      },
+      {
+        "GUID": "link_down"
+      }
+    ]
+  },
+  "Scene": {
+    "Name": "Level01",
+    "GUID": "1a9e5171-c7ab-47d4-9af4-d490d1494201",
+    "IsEnabled": true,
+    "Entities": [
+      {
+        "Name": "Player",
+        "GUID": "uwu",
+        "Transform": {
+          "Position": [100.0, 200.0],
+          "Rotation": 0.0,
+          "Scale": [5.0, 5.0]
+        },
+        "Components": [
+          {
+            "ClassName": "AnimatedSprite",
+            "ClassData": {
+              "Texture": "link_down",
+              "SpriteSheet": {
+                "Rows": 1,
+                "Columns": 12,
+                "Frames": 12
+              }
+            }
+          },
+          {
+            "ClassName": "BoxCollider",
+            "ClassData": {}
+          },
+          {
+            "ClassName": "Player",
+            "ClassData": {
+              "Speed": 400.0,
+              "DeathScene": "45f479c9-f110-43c5-be35-9fbbc5d7d694"
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Enemy",
+        "GUID": "uwu2",
+        "Transform": {
+          "Position": [1000.0, 250.0],
+          "Rotation": 0.0,
+          "Scale": [0.4, 0.4]
+        },
+        "Components": [
+          {
+            "ClassName": "Sprite",
+            "ClassData": {
+              "Texture": "awooga"
+            }
+          },
+          {
+            "ClassName": "CircleCollider",
+            "ClassData": {}
+          }
+        ]
+      }
+    ]
+  }
+}
