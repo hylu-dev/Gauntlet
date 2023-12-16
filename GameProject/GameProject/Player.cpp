@@ -76,7 +76,6 @@ void Player::Update() {
 
     if (collider == nullptr)
     {
-        LOG("no collider uwu");
         return;
     }
     for (const auto& other: collider->OnCollisionEnter())

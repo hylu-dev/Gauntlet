@@ -62,7 +62,7 @@
         "Transform": {
           "Position": [1000.0, 250.0],
           "Rotation": 0.0,
-          "Scale": [1.0, 1.0]
+          "Scale": [0.5, 0.5]
         },
         "Components": [
           {
@@ -74,6 +74,12 @@
           {
             "ClassName": "CircleCollider",
             "ClassData": {}
+          },
+          {
+            "ClassName": "Enemy",
+            "ClassData": {
+              "Speed": 100.0
+            }
           }
         ]
       }
