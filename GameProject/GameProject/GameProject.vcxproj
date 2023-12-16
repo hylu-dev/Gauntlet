@@ -189,6 +189,7 @@
     <ClCompile Include="Game_Register.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Spawner.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
@@ -196,6 +197,7 @@
     <ClInclude Include="GameCore.h" />
     <ClInclude Include="GameOver.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Spawner.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\Build\Assets\alien.png" />

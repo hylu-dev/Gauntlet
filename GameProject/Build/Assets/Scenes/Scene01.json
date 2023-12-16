@@ -60,29 +60,17 @@
         ]
       },
       {
-        "Name": "Enemy",
-        "GUID": "uwu2",
+        "Name": "Spawner",
+        "GUID": "spawnerthing",
         "Transform": {
-          "Position": [1000.0, 250.0],
+          "Position": [640.0, 0.0],
           "Rotation": 0.0,
-          "Scale": [0.5, 0.5]
+          "Scale": [1.0, 1.0]
         },
         "Components": [
           {
-            "ClassName": "Sprite",
-            "ClassData": {
-              "Texture": "bat"
-            }
-          },
-          {
-            "ClassName": "BoxCollider",
+            "ClassName": "Spawner",
             "ClassData": {}
-          },
-          {
-            "ClassName": "Enemy",
-            "ClassData": {
-              "Speed": 100.0
-            }
           }
         ]
       }

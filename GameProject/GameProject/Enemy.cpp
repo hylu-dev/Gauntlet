@@ -11,7 +11,7 @@ void Enemy::Initialize()
 {
     Component::Initialize();
     start_pos = ownerEntity->GetTransform().position;
-    collider = (BoxCollider*)ownerEntity->GetComponent("BoxCollider");
+    collider = (BoxCollider*)ownerEntity->CreateComponent("BoxCollider");
 }
 void Enemy::Update() {
     target = SceneManager::Get().FindEntityByName("Player").front()->GetTransform();
